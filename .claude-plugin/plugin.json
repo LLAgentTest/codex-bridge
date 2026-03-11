@@ -1,0 +1,10 @@
+{
+  "name": "codex-bridge",
+  "description": "Use OpenAI Codex CLI as a sub-agent from Claude Code. Delegates tasks to Codex for alternative solutions, stubborn bugs, or when GPT-series models may perform better.",
+  "version": "0.1.0",
+  "author": {
+    "name": "LLAgentTest"
+  },
+  "repository": "https://github.com/LLAgentTest/codex-bridge",
+  "license": "MIT"
+}
