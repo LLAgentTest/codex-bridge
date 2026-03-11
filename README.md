@@ -54,10 +54,31 @@ bash scripts/codex-wrapper.sh "fix the race condition in src/worker.ts" /path/to
 
 ## Configuration
 
-The wrapper accepts three arguments:
+The wrapper accepts four arguments:
 1. **Task description** (required)
 2. **Working directory** (default: current directory)
 3. **Timeout in seconds** (default: 300)
+4. **Model override** (optional, e.g. "o3", "o4-mini")
+
+## Output format
+
+The wrapper **always** returns valid JSON on stdout:
+
+```json
+// Success
+{"success": true, "exit_code": 0, "message": "...", "files_changed": ["src/foo.ts"]}
+
+// Failure
+{"success": false, "exit_code": 1, "error": "...", "details": "..."}
+
+// Timeout
+{"success": false, "exit_code": 124, "error": "Codex timed out after 300s", "partial_output": "..."}
+```
+
+Result extraction uses a 3-tier fallback:
+1. `--output-last-message` file (most reliable)
+2. JSONL event stream parsing
+3. Raw stderr capture
 
 ## Architecture
 
